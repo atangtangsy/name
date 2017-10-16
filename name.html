@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>
+            Hello World
+        </title>
+        <link rel='stylesbeet' href='/stylesheets/style.css'/>
+    </head>
+
+    <body>
+        <!-- <div id="divl"/> -->
+        <script>
+var dxy = new Array;
+var arr = new Array();
+arr[0] = [1,"x0","y0","x00","y00"];  
+arr[1] = [2,"x0","y0","x00","y00"];  
+arr[2] = [3,"x0","y0","x00","y00"]; 
+arr[3] = [4,"x0","y0","x00","y00"];  
+arr[4] = [5,"x0","y0","x00","y00"];  
+arr[5] = [6,"x0","y0","x00","y00"];
+arr[6] = [7,"x0","y0","x00","y00"];   
+arr[7] = [8,"x0","y0","x00","y00"]; 
+arr[8] = [9,"x0","y0","x00","y00"];  
+arr[9] = [10,"x0","y0","x00","y00"]; 
+arr[10] = [11,"x0","y0","x00","y00"];
+arr[11] = [12,"x0","y0","x00","y00"];
+
+arr[12] = [13,"x0","y0","x00","y00"];
+arr[13] = [14,"x0","y0","x00","y00"];
+arr[14] = [15,"x0","y0","x00","y00"];
+arr[15] = [16,"x0","y0","x00","y00"];
+arr[16] = [17,"x0","y0","x00","y00"];
+arr[17] = [18,"x0","y0","x00","y00"];
+function Write2Text()
+{  
+var fso = new ActiveXObject("Scripting.FileSystemObject");  
+var f = fso.CreateTextFile("TAN.txt", true); 
+for(var i=0;i<arr.length;i++) 
+{  
+    if(f!="END"){
+f.write(arr[i]) 
+f.WriteBlankLines(1)}
+
+}  
+f.Close(); 
+}  
+</script>  
+<input type=button value="Write" onclick="Write2Text()">  
+<script>  
+function GetHeader(src) {  
+var ForReading=1;  
+var fso=new ActiveXObject("Scripting.FileSystemObject"); 
+var f=fso.OpenTextFile(src,ForReading);  
+return(f.ReadAll());  
+}  
+function ReadText(){  
+var arr=GetHeader("a.txt");
+split("\r\n");
+for(var i=0;i<arr.length;i++){  
+alert("第"+(i+1)+"行数据为："+arr[i]);  
+}  
+}  
+</script>  
+<input type=button value="Read" onclick="ReadText()">  
+
+    var element=document.getElementById("divl");
+    var c=document.createElement("canvas");
+    var ctx=c.getContext("2d");
+    ctx.fillStyle="#FF0000";
+    ctx.fillRect(0,0,16,16);
+        for(var i=0;i<arr.length;i++){
+            ctx.moveTo(arr[0].x0,arr[0].y0);
+            ctx.lineTo(arr[0].x00,arr[0].y00);
+            ctx.moveTo(40,60);
+            ctx.lineTo(200,250);
+            }
+    ctx.stroke();
+    element.appendChild(c);
+
+    window.onresize = click1;
+
+    function click1(id){
+      var element =document.getElementById("divl");
+      var w =element .clientWidth;
+      var h =element .clientHeight;
+      console.log("w: %d,h: %d ",w,h);
+
+    } 
+
+    </script>
+
+    </body> 
+"# name" 
