@@ -1,94 +1,89 @@
 <!DOCTYPE html>
 <html>
-    
-    <head>
-        <title>
-            Hello World
-        </title>
-        <link rel='stylesbeet' href='/stylesheets/style.css'/>
-    </head>
-
-    <body>
-        <!-- <div id="divl"/> -->
-        <script>
-var dxy = new Array;
-var arr = new Array();
-arr[0] = [1,"x0","y0","x00","y00"];  
-arr[1] = [2,"x0","y0","x00","y00"];  
-arr[2] = [3,"x0","y0","x00","y00"]; 
-arr[3] = [4,"x0","y0","x00","y00"];  
-arr[4] = [5,"x0","y0","x00","y00"];  
-arr[5] = [6,"x0","y0","x00","y00"];
-arr[6] = [7,"x0","y0","x00","y00"];   
-arr[7] = [8,"x0","y0","x00","y00"]; 
-arr[8] = [9,"x0","y0","x00","y00"];  
-arr[9] = [10,"x0","y0","x00","y00"]; 
-arr[10] = [11,"x0","y0","x00","y00"];
-arr[11] = [12,"x0","y0","x00","y00"];
-
-arr[12] = [13,"x0","y0","x00","y00"];
-arr[13] = [14,"x0","y0","x00","y00"];
-arr[14] = [15,"x0","y0","x00","y00"];
-arr[15] = [16,"x0","y0","x00","y00"];
-arr[16] = [17,"x0","y0","x00","y00"];
-arr[17] = [18,"x0","y0","x00","y00"];
-function Write2Text()
-{  
-var fso = new ActiveXObject("Scripting.FileSystemObject");  
-var f = fso.CreateTextFile("TAN.txt", true); 
-for(var i=0;i<arr.length;i++) 
-{  
-    if(f!="END"){
-f.write(arr[i]) 
-f.WriteBlankLines(1)}
-
-}  
-f.Close(); 
-}  
-</script>  
-<input type=button value="Write" onclick="Write2Text()">  
-<script>  
-function GetHeader(src) {  
-var ForReading=1;  
-var fso=new ActiveXObject("Scripting.FileSystemObject"); 
-var f=fso.OpenTextFile(src,ForReading);  
-return(f.ReadAll());  
-}  
-function ReadText(){  
-var arr=GetHeader("a.txt");
-split("\r\n");
-for(var i=0;i<arr.length;i++){  
-alert("第"+(i+1)+"行数据为："+arr[i]);  
-}  
-}  
-</script>  
-<input type=button value="Read" onclick="ReadText()">  
-
-    var element=document.getElementById("divl");
-    var c=document.createElement("canvas");
-    var ctx=c.getContext("2d");
-    ctx.fillStyle="#FF0000";
-    ctx.fillRect(0,0,16,16);
-        for(var i=0;i<arr.length;i++){
-            ctx.moveTo(arr[0].x0,arr[0].y0);
-            ctx.lineTo(arr[0].x00,arr[0].y00);
-            ctx.moveTo(40,60);
-            ctx.lineTo(200,250);
+<head>
+    <script type="text/javascript"></script>            
+    <meta charset = "utf-8">
+</head>
+<body>
+    <div id = "div1"  />
+        <h1>DrawName</h1>
+		
+    <label>Please Choose Your File</label>
+    <input id = "fileinput" type = "file" onchange = "control()" />
+    <br> </br>
+    <canvas id = "myCanvas1" width = "160" height = "160"
+    style = "border : 1px solid #431EAA;" >    
+    </canvas>
+    <br> </br>
+    <script>
+     function control()
+        {
+            var file = document.getElementById("fileinput").files[0];   
+            var reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function(e)
+            {
+                var str = this.result; 
+                var coordX = new Array();
+                var coordY = new Array();
+                for (var m = 0;m < 100 ; m++)
+                {
+                    coordX[m] = new Array;
+                    coordY[m] = new Array;
+                    for (var n = 0;n < 10; n++)
+                    {
+                        coordX[m][n] = "";
+                        coordY[m][n] = "";
+                    }
+                }
+                Separation(str,coordX,coordY);
+                var c = document.getElementById("myCanvas1");
+                var ctx1 = c.getContext("2d");
+                ctx1.fillStyle = "FF0000";
+                DrawName(coordX,coordY,ctx1);
             }
-    ctx.stroke();
-    element.appendChild(c);
-
-    window.onresize = click1;
-
-    function click1(id){
-      var element =document.getElementById("divl");
-      var w =element .clientWidth;
-      var h =element .clientHeight;
-      console.log("w: %d,h: %d ",w,h);
-
+        }
+        function DrawName(coordX,coordY,ctx1)
+{
+    for (var i = 0;i < coordX.length;i++)
+    {        
+        for (var j = 0;j < coordX[i].length;j++)
+        {                   
+            ctx1.beginPath();
+            ctx1.moveTo(coordX[i][j]*10,coordY[i][j]*10);
+            ctx1.lineTo(coordX[i][j+1]*10,coordY[i][j+1]*10); 
+            ctx1.stroke();     
+        }
+        
     } 
+}   
+         function Separation(str,coordX,coordY)
+{
+    var items = new Array();
+    items = str.split("END\r\n"); 
+    var lines = new Array();
+    for (var m = 0;m < items.length ; m++) 
+    {
+        lines[m] = new Array();
+        for (var n = 0;n < 10;n++)
+        {
+            lines[m][n] = "";
+        }
+    }
+    for (var i = 0;i < items.length ; i++)
+    {
+        lines[i] = items[i].split("\r\n");
+    }
+    for (var p = 0;p < lines.length ; p++)
+    {
+        for (var q = 1;q < lines[p].length ; q++)
+        {
+            coordX[p][q-1] = Number(lines[p][q].split(",")[0]);
+            coordY[p][q-1] = Number(lines[p][q].split(",")[1]);
+        }
+    }
+}
+</script>
 
-    </script>
-
-    </body> 
-"# name" 
+</body>
+</html>"# name" 
